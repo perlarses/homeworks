@@ -1,0 +1,15 @@
+#if(BUILD_TESTING)
+    add_library(string_split split_string.cpp)
+    add_library(string_trim trim_string.cpp)
+    target_link_libraries(string_split PUBLIC cxx_setup)
+    target_link_libraries(string_trim PUBLIC cxx_setup)
+
+    add_executable(split_string_test split_string_test.cpp)
+    target_link_libraries(split_string_test PRIVATE string_split GTest::gtest_main)
+    add_executable(trim_string_test trim_string_test.cpp)
+    target_link_libraries(trim_string_test PRIVATE string_trim GTest::gtest_main)
+
+    include(GoogleTest)
+    gtest_discover_tests(split_string_test)
+    gtest_discover_tests(trim_string_test)
+#endif()
